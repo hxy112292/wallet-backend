@@ -6,10 +6,12 @@ import org.blockchain.wallet.resttemplate.SochainRestAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
+/**
+ * @author hxy
+ */
 @RestController
-@RequestMapping(value = "/BTC")
-public class BtcController {
+@RequestMapping(value = "/LTC")
+public class LtcController {
 
     @Autowired
     SochainRestAPI sochainRestAPI;
@@ -17,28 +19,28 @@ public class BtcController {
     @Autowired
     CryptoRestAPI cryptoRestAPI;
 
-    @GetMapping(value = "/tx/{hash}")
-    public String getTxInfo(@PathVariable String hash) {
-        return sochainRestAPI.getBTCTxInfo(hash);
-    }
-
     @GetMapping(value = "/address/{address}")
     public String getAddressInfo(@PathVariable String address) {
-        return sochainRestAPI.getBTCAddressInfo(address);
+        return sochainRestAPI.getLTCAddressInfo(address);
+    }
+
+    @GetMapping(value = "/tx/{hash}")
+    public String getTxInfo(@PathVariable String hash) {
+        return sochainRestAPI.getLTCTxInfo(hash);
     }
 
     @GetMapping(value = "/tx/fee")
     public String getTxFee() {
-        return cryptoRestAPI.getBTCTxFee();
+        return cryptoRestAPI.getLTCTxFee();
     }
 
     @PostMapping(value = "/send_tx")
     public String broadcast(@RequestBody SochainBroadcast sochainBroadcast) {
-        return sochainRestAPI.broadcastBTC(sochainBroadcast);
+        return sochainRestAPI.broadcastLTC(sochainBroadcast);
     }
 
     @GetMapping(value = "/unspent/{address}")
     public String getUnspentTx(@PathVariable String address) {
-        return sochainRestAPI.getBTCUnSpentTxInfo(address);
+        return sochainRestAPI.getLTCUnSpentTxInfo(address);
     }
 }

@@ -108,4 +108,74 @@ public class SochainRestAPI {
 
         return response.getBody();
     }
+
+    public String getLTCAddressInfo(String address) {
+        String url = rootUrl + "/api/v2/address/LTC/" + address;
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
+
+    public String getLTCTxInfo(String txid) {
+        String url = rootUrl + "/api/v2/tx/LTC/" + txid;
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
+
+    public String getLTCUnSpentTxInfo(String address) {
+        String url = rootUrl + "/api/v2/get_tx_unspent/LTC/" + address;
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
+
+    public String broadcastLTC(SochainBroadcast sochainBroadcast) {
+        String url = rootUrl + "/api/v2/send_tx/LTC";
+
+        String requestBody = JSONObject.toJSONString(sochainBroadcast);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(requestBody,headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
+
+    public String getBTCAddressInfo(String address) {
+        String url = rootUrl + "/api/v2/address/BTC/" + address;
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
+
+    public String getBTCUnSpentTxInfo(String address) {
+        String url = rootUrl + "/api/v2/get_tx_unspent/BTC/" + address;
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, null, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
+
+    public String broadcastBTC(SochainBroadcast sochainBroadcast) {
+        String url = rootUrl + "/api/v2/send_tx/BTC";
+
+        String requestBody = JSONObject.toJSONString(sochainBroadcast);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(requestBody,headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class, new HashMap<>());
+
+        return response.getBody();
+    }
 }
