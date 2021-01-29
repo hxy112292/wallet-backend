@@ -22,6 +22,8 @@ public class MyExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public BaseResponse handlerRuntimeException(RuntimeException ex) {
 
+        ex.printStackTrace();
+
         if (ex.getMessage() == null || ex.getMessage().isEmpty()) {
             return new ErrorResponse(ErrorMessage.SERVICE_EXCEPTION);
         }
